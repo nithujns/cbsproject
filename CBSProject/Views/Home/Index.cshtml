@@ -1,0 +1,626 @@
+﻿@model List<Invoice>
+@{
+    ViewData["Title"] = "Home Page";
+    var totalAmountDue = 0;
+    foreach (var item in Model)
+    {
+        totalAmountDue = totalAmountDue + @item.AmountDue;
+    }
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>CBS Take home project</title>
+</head>
+<body>
+    <!-- Nav bar-->
+    <nav class="navbar navbar-expand-sm navbar-styling">
+        <a class="navbar-brand" href="#">
+            <img src="img/image-1.png" class="company-logo ml-lg-5" />
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <div id="title" class="navbar-nav mr-auto">
+                <span id="company-name" class="nav-item John-Doe-Manufacturi"> </span>
+            </div>
+        </div>
+
+        <div class="flex-column align-items-end">
+            <div class="dropdown nav-dropdown">
+                <button id="user-name"
+                        class="btn dropdown-toggle px-2 py-0"
+                        type="button"
+                        data-toggle="dropdown"
+                        aria-expanded="false"></button>
+            </div>
+
+            <span id="log-out"
+                  class="navbar-text ml-auto py-0 px-lg-2 mr-3 d-flex justify-content-end">Log Out</span>
+        </div>
+    </nav>
+
+    <!-- Everything below Nav -->
+    <div class="row mx-0 my-0">
+        <!-- Side bar -->
+        <nav class="col SideBar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/Hamburger.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle"></div>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2 active">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/SelectnPay.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle">
+                                <a class="nav-link sidebar-text px-0 py-0 text-sm-left text-center"
+                                   href="#">
+                                    Select & Pay
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/QuickPayments.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle">
+                                <a class="nav-link sidebar-text px-0 py-0 text-sm-left text-center"
+                                   href="#">
+                                    Quick Payment
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/AutoPayments.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle">
+                                <a class="nav-link sidebar-text px-0 py-0 text-sm-left text-center"
+                                   href="#">
+                                    Auto Payments
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/Reports.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle">
+                                <a class="nav-link sidebar-text px-0 py-0 text-sm-left text-center"
+                                   href="#">
+                                    Reports
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <div class="row mx-0 pt-0 py-1 py-sm-2">
+                            <div class="col-sm-3 px-0 text-center align-middle">
+                                <img class="sidebar-img"
+                                     src="img/navigationIcons/MyAccount.png" />
+                            </div>
+                            <div class="col-sm-9 px-0 align-middle">
+                                <a class="nav-link sidebar-text px-0 py-0 text-sm-left text-center"
+                                   href="#">
+                                    My Account
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- All Content -->
+        <main role="main" class="col-10 pt-3 px-4 main-background">
+            <div class="py-3 pt-md-4 pb-md-4 mx-auto Page-header">
+                <span id="welcome-message"></span>
+                <span class="d-none d-lg-inline">
+                    Here is a summary of your account.
+                </span>
+                <p class="mt-3 d-lg-none d-sm-block">
+                    Here is a summary of your account.
+                </p>
+            </div>
+
+            <!-- Content : Cards -->
+            <div class="row">
+                <div class="col-md mb-4">
+                    <div class="card CardStyle h-100">
+                        <div class="card-body px-5 py-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <img class="card-img"
+                                         src="img/dashboardCardIcons/AmountDue.png" />
+                                </li>
+                                <li id="total-amount-due" class="Card-header"></li>
+                                <li class="Card-text">@("Total amount due:" + '$' + totalAmountDue)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-4">
+                    <div class="card CardStyle h-100">
+                        <div class="card-body px-5 py-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <img class="card-img"
+                                         src="img/dashboardCardIcons/Invoices.png" />
+                                </li>
+                                <li id="open-invoices" class="Card-header"></li>
+                                <li class="Card-text">Open Invoices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-4">
+                    <div class="card CardStyle h-100">
+                        <div class="card-body px-5 py-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <img class="card-img"
+                                         src="img/dashboardCardIcons/SalesOrders.png" />
+                                </li>
+                                <li id="open-sales-orders" class="Card-header"></li>
+                                <li class="Card-text">Open sales orders</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-4">
+                    <div class="card CardStyle h-100">
+                        <div class="card-body px-5 py-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <img class="card-img"
+                                         src="img/dashboardCardIcons/Credits.png" />
+                                </li>
+                                <li id="total-credits" class="Card-header"></li>
+                                <li class="Card-text">Total credits</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-4">
+                    <div class="card CardStyle h-100">
+                        <div class="card-body px-5 py-4">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <img class="card-img"
+                                         src="img/dashboardCardIcons/AutoPay.png" />
+                                </li>
+                                <li id="auto-pay" class="Card-header"></li>
+                                <li class="Card-text">Auto pay</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content : Invoices List -->
+            <div class="card d-none d-lg-block Invoices-list">
+                <div class="card-body">
+                    <div class="d-inline">
+                        <img class="step-img mr-3" src="img/Step1.png" />
+                        <span class="card-title">Select invoices to pay.</span>
+                    </div>
+
+                    <div class="table-responsive my-4">
+                        <div></div>
+                        <table class="table table-bordered table-striped table-sm" id="invoices-table-body">
+                            <thead>
+                                <tr class="spacer">
+                                    <th colspan="9"></th>
+                                </tr>
+                                <tr class="spacer">
+                                    <th colspan="9"></th>
+                                </tr>
+                                <tr>
+                                    <th class="table-header-styling py-2">Invoice #</th>
+                                    <th class="table-header-styling py-2">
+                                        Date <img class="ml-2" src="img/caret-bottom.svg" />
+                                    </th>
+                                    <th class="table-header-styling py-2">
+                                        Due Date <img class="ml-2" src="img/caret-bottom.svg" />
+                                    </th>
+                                    <th class="table-header-styling py-2">
+                                        Invoice Total
+                                        <img class="ml-2" src="img/caret-bottom.svg" />
+                                    </th>
+                                    <th class="table-header-styling py-2">
+                                        Amount Due
+                                        <img class="ml-2" src="img/caret-bottom.svg" />
+                                    </th>
+                                    <th class="table-header-styling py-2">Terms</th>
+                                    <th class="table-header-styling py-2">
+                                        Description
+                                        <img class="ml-2" src="img/caret-bottom.svg" />
+                                    </th>
+                                    <th class="table-header-styling py-2">PO #</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="tr0">
+                                        <td>
+                                           
+                                            <div class="form-inline">
+                                                <input type="checkbox" class="custom-control custom-checkbox" id="customCheck1" value=@item.InvoiceNumber name="invoice" amt_field=@item.InvoiceNumber>
+                                                <span class="" id="invoice-span" for="customCheck1">@item.InvoiceNumber</span>
+                                            </div>
+                                            
+                                        </td>
+                                        <td>@item.InvoiceDate</td>
+                                        <td>@item.DueDate</td>
+                                        <td>$@item.Total</td>
+                                        <td name="txtCostAmount1" class="customerIDCell"><input id=@item.InvoiceNumber value=@item.AmountDue /></td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Terms</td>
+                                        <td>@item.PONumber</td>
+                                    </tr>
+
+                                }
+                                <!--
+                                <tr id="tr1">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1" value="234456" name="invoice" amt_field="amt-due1">
+                                            <label class="custom-control-label" for="customCheck1"><span id="invoice-span">234456</span></label>
+                                        </div>
+                                    </td>
+                                    <td>05/13/2016</td>
+                                    <td>05/13/2016</td>
+                                    <td>$135</td>
+                                    <td id="amt-due1" value="135" name="txtCostAmount1" class="customerIDCell">$135</td>
+                                    <td>Discount of $100 if aid before 05/10/2016</td>
+                                    <td>Lorem ipsum dolor sit amet</td>
+                                    <td>258963</td>
+                                </tr>
+                                <tr id="tr2">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2" value="741852" name="invoice" amt_field="amt-due2">
+                                            <label class="custom-control-label" for="customCheck2"><span id="invoice-span">741852</span></label>
+                                        </div>
+                                    </td>
+                                    <td>08/23/2020</td>
+                                    <td>08/23/2020</td>
+                                    <td>$160</td>
+                                    <td id="amt-due2" value="160" name="txtCostAmount2" class="customerIDCell">$160</td>
+                                    <td>Discount of $100 if aid before 05/10/2016</td>
+                                    <td>Lorem ipsum dolor sit amet</td>
+                                    <td>563541</td>
+                                </tr>
+                                <tr id="tr3">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck3" value="789369" name="invoice" amt_field="amt-due3">
+                                            <label class="custom-control-label" for="customCheck3"><span id="invoice-span">789369</span></label>
+                                        </div>
+                                    </td>
+                                    <td>10/15/2019</td>
+                                    <td>10/15/2019</td>
+                                    <td>$170</td>
+                                    <td id="amt-due3" value="170" name="txtCostAmount3" class="customerIDCell">$170</td>
+                                    <td>Discount of $100 if aid before 05/10/2016</td>
+                                    <td>Lorem ipsum dolor sit amet</td>
+                                    <td>789456</td>
+                                </tr>
+                                <tr id="tr4">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck4" value="159951" name="invoice" amt_field="amt-due4">
+                                            <label class="custom-control-label" for="customCheck4"><span id="invoice-span">159951</span></label>
+                                        </div>
+                                    </td>
+                                    <td>04/25/2019</td>
+                                    <td>04/25/2019</td>
+                                    <td name="txtCostAmount4" class="customerIDCell"></td>
+                                    <td><input id="amt-due4" value="$250" /></td>
+                                    <td>Discount of $100 if aid before 05/10/2016</td>
+                                    <td>Lorem ipsum dolor sit amet</td>
+                                    <td>951623</td>
+                                </tr>
+                                <tr id="tr5">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck5" name="invoice" value="739456" amt_field="amt-due5">
+                                            <label class="custom-control-label" for="customCheck5"><span id="invoice-span">739456</span></label>
+                                        </div>
+                                    </td>
+                                    <td>09/22/2020</td>
+                                    <td>09/22/2020</td>
+                                    <td>$140</td>
+                                    <td id="amt-due5" name="txtCostAmount5" class="customerIDCell">140</td>
+                                    <td>Discount of $100 if aid before 05/10/2016</td>
+                                    <td>Lorem ipsum dolor sit amet</td>
+                                    <td>147258</td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                        <span id="invoices-selected"></span>
+                        <span id="total-payment-amount"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Content: Payments -->
+            <div class="py-5 d-none d-lg-block">
+                <div class="row">
+                    <!-- Content : Payment Method -->
+                    <div class="col-sm-7">
+                        <div class="card Payment-method h-100">
+                            <div class="card-body">
+                                <div class="d-inline">
+                                    <img class="step-img mr-3" src="img/Step2.png" />
+                                    <span class="card-title">Select a payment method</span>
+                                </div>
+
+                                <ul class="nav nav-tabs my-5">
+                                    <li class="nav-item">
+                                        <span id="by-credit-card"
+                                              class="nav-link active"
+                                              href="#">
+                                            Pay by Credit Card
+                                        </span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span id="by-bank-account" class="nav-link" href="#">
+                                            Pay with Bank Account
+                                        </span>
+                                    </li>
+                                </ul>
+
+                                <ul class="nav card-selector">
+                                    <li class="nav-item">
+                                        <span class="nav-link active px-0 py-2 mx-3" href="#">Saved Card</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span id="new-card"
+                                              class="nav-link px-0 py-2 mx-3"
+                                              href="#">
+                                            New Card
+                                        </span>
+                                    </li>
+                                </ul>
+
+                                <form id="saved-card-form" class="container mt-5">
+                                    <div class="form-group">
+                                        <label for="credit-cards">
+                                            Saved Card *
+                                        </label>
+                                        <select class="form-control saved-card-dropdown"
+                                                id="credit-cards">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSecurityCode">
+                                            Security Code (CVV2 / CVC)
+                                        </label>
+                                        <input type="text"
+                                               class="form-control security-code"
+                                               id="inputSecurityCode" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content : Review Payment Summary -->
+                    <div class="col-sm-5">
+                        <div class="card Payment-summary h-100">
+                            <div class="card-body">
+                                <div class="d-inline">
+                                    <img class="step-img mr-3" src="img/Step3.png" />
+                                    <span class="card-title">Review payment summary</span>
+                                </div>
+
+                                <div id="payment-summary-text"
+                                     class="border-bottom my-5 pb-5">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            # of invoices selected:
+                                        </div>
+                                        <div class="col-sm d-flex justify-content-end" id="invoicesselected">
+                                            0
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            Invoice payment amount:
+                                        </div>
+                                        <div class="col-sm d-flex justify-content-end" id="invoicepayamt">
+                                            $0.00
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            3% card convenience fee:
+                                        </div>
+                                        <div class="col-sm d-flex justify-content-end" id="cfee">
+                                            $0.00
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="total-payment-amount" class="container mt-4 mb-5">
+                                    <div class="row">
+                                        <div class="col-sm-9 px-0">
+                                            Total payment amount:
+                                        </div>
+                                        <div class="col-sm-3 d-flex justify-content-end px-0" id="totalpaymentamt">
+                                            $0.00
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="pay-now-btn"
+                                        type="button"
+                                        class="btn btn-primary btn-lg btn-block mt-4 py-2" data-toggle="modal" data-target="#myModal">
+                                    Pay Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="container-wrap">
+                                <div class="modal-header container">
+                                    <h4 class="modal-title">My Saved Payment Methods</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="column1">
+                                            <table class="modal-sidetable">
+                                                <tr>
+                                                    <td class="add-icon">
+                                                        <img src="~/img/add.png" height="18" width="20" /> <span>Add New Card</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">
+                                                            <i class="bold-italictext">Default</i>
+                                                            <div class="img-text"> <img src="~/img/visa.png" height="25" width="35" />ending in 2244<br /><i>"Main debit"</i></div>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="img-text"> <img src="~/img/discover.png" height="30" width="40" />ending in 2997<br /><i>"Main debit"</i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="img-text"> <img src="~/img/amex.png" height="30" width="40" />ending in 1221<br /><i>"Main debit"</i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="img-text"> <img src="~/img/Mastercard.png" height="30" width="40" />ending in 9672<br /><i>"Main debit"</i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="img-text"> <img src="~/img/visa.png" height="30" width="40" />ending in 5555<br /><i>"Main debit"</i></div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="column2">
+                                            <div class="row modal-right">
+                                                <div class='row'>
+                                                    <div class='column'>
+                                                        <div class='split-column-left'>
+                                                            <label>Card Number *</label><br />
+                                                            <input />
+                                                        </div>
+                                                    </div>
+                                                    <div class='column'>
+                                                        <div class='split-column-left'>
+                                                            <label>Billing Address *</label><br />
+                                                            <input />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='column'>
+                                                        <div class='split-column-left'>
+                                                            <label>Name on Card *</label><br />
+                                                            <input />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class='row column'>
+                                                        <div class="column split-column">
+                                                            <div class="split-column-left">
+                                                                <label>Zip Code/Postal Code*</label>
+                                                                <input />
+                                                            </div>
+                                                            <div class="split-column-left">
+                                                                <label>Card Nick Name*</label>
+                                                                <input />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class="column split-column">
+                                                        <div class="split-column-left">
+                                                            <label>Expiration date*</label><br />
+                                                            <input type="number" min="1" max="12" />
+                                                            <input type="number" min="00" max="99" />
+                                                        </div>
+                                                    </div>
+                                                    <div class='column'>
+                                                        <div class='right-column checkbox-custom'>
+                                                            <input type="checkbox" />&nbsp;&nbsp;&nbsp;<label>Make default payment method</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row col-xs-12 col-sm-12 .col-md-12 col-lg-12 bottom-buttons">
+                                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" align="left"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button></div>
+                                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" align="right"><button type="button" class="btn  btn-outline-primary" data-dismiss="modal">Save</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Done</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Make Payment Button -->
+            <div class="d-lg-none">
+                <button id="make-payment-btn"
+                        type="button"
+                        class="btn btn-primary btn-lg btn-block mx-0 mt-3 mb-5">
+                    Make Payment
+                </button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
